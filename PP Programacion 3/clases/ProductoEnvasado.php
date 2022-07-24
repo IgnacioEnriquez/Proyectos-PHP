@@ -5,6 +5,8 @@ namespace IgnacioEnriquez;
 require_once(__DIR__ . "./Producto.php");
 require_once(__DIR__ . "./IParte1.php");
 require_once(__DIR__ . "./IParte2.php");
+require_once(__DIR__ . "./IParte3.php");
+
 
 
 
@@ -13,7 +15,9 @@ use Exception;
 use PDO;
 use PDOException;
 
-class ProductoEnvasado extends Producto implements IParte1,IParte2
+
+// Falta Agregar Producto Envasado
+class ProductoEnvasado extends Producto implements IParte1,IParte2,IParte3
 {
     public int $id;
     public int $codigoBarra;
@@ -180,4 +184,21 @@ class ProductoEnvasado extends Producto implements IParte1,IParte2
 
         return $retorno;
     }
+
+    public function Existe(array $productos): bool
+    {
+        $retorno = false;
+
+        foreach ($productos as $producto) 
+        {
+            if($producto -> nombre === $this->nombre && $producto -> origen === $this->origen)
+            {
+                $retorno = true;
+                break;
+            }            
+        }
+        
+        return $retorno;
+    }
+
 }
